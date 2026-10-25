@@ -1,0 +1,17 @@
+.pio/
+.pioenvs/
+.piolibdeps/
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+build/
+tests/build/
+
+# Windows Mark-of-the-Web (Zone.Identifier) sidecar/ADS files.
+*:Zone.Identifier*
+Zone.Identifier

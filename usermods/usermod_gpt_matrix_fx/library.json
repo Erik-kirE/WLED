@@ -1,0 +1,17 @@
+{
+  "name": "wled-usermod-gpt-matrix-fx",
+  "version": "0.3.0",
+  "description": "40 procedural and AudioReactive matrix effects (30 standard, 10 audio) for WLED, designed and developed by ChatGPT (OpenAI)",
+  "keywords": "wled,usermod,effects,2d,matrix,audioreactive",
+  "license": "MIT",
+  "build": {
+    "libArchive": false,
+    "srcDir": ".",
+    "srcFilter": [
+      "+<gpt_matrix_fx.cpp>",
+      "-<tests/>",
+      "-<examples/>"
+    ]
+  },
+  "dependencies": {}
+}

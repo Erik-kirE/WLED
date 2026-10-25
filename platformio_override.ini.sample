@@ -1,0 +1,52 @@
+; Living Stained Glass — copy this file to platformio_override.ini (gitignored)
+; and adjust board / partitions to match the physical ESP32 flash size.
+;
+; Notes from the LSG build that flashed LSG_002a via OTA:
+; - Do not replace inherited build_flags entirely; that drops esp32dev / IDF V5
+;   flags (including -D__unreachable=__builtin_unreachable needed by esp_dmx).
+; - extreme_partitions is a 16MB table. Prefer large_partitions (8MB) or
+;   default_partitions (4MB) for USB full-flash. OTA app updates can still work
+;   when only the firmware.bin is uploaded into an existing app slot.
+; - Appending a second -D WLED_RELEASE_NAME causes redefine warnings and may
+;   force skipValidation=1 on OTA. Prefer build_unflags of the parent name, or
+;   keep the stock \"ESP32\" name for smoother OTA.
+
+[platformio]
+default_envs = usermods_esp32
+
+[env:usermods_esp32]
+extends = env:esp32dev
+custom_usermods =
+  usermod_gpt_matrix_fx
+  audioreactive
+board_build.partitions = ${esp32.extreme_partitions}
+build_flags = ${env:esp32dev.build_flags}
+  -D WLED_RELEASE_NAME=\"LSG_ESP32\"
+
+[env:usermods_esp32c3]
+extends = env:esp32c3dev
+board = esp32-c3-devkitm-1
+custom_usermods =
+  usermod_gpt_matrix_fx
+  audioreactive
+board_build.partitions = ${esp32.extreme_partitions}
+build_flags = ${env:esp32c3dev.build_flags}
+  -D WLED_RELEASE_NAME=\"LSG_ESP32C3\"
+
+[env:usermods_esp32s2]
+extends = env:lolin_s2_mini
+custom_usermods =
+  usermod_gpt_matrix_fx
+  audioreactive
+board_build.partitions = ${esp32.extreme_partitions}
+build_flags = ${env:lolin_s2_mini.build_flags}
+  -D WLED_RELEASE_NAME=\"LSG_ESP32S2\"
+
+[env:usermods_esp32s3]
+extends = env:esp32s3dev_16MB_opi
+custom_usermods =
+  usermod_gpt_matrix_fx
+  audioreactive
+board_build.partitions = ${esp32.extreme_partitions}
+build_flags = ${env:esp32s3dev_16MB_opi.build_flags}
+  -D WLED_RELEASE_NAME=\"LSG_ESP32S3\"
